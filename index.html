@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Encuesta</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #b6e7b6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    button {
+      padding: 15px 30px;
+      border: none;
+      border-radius: 30px;
+      background: #d0f0d0;
+      color: #2c5f2c;
+      font-size: 18px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    #no {
+      position: absolute;
+    }
+
+    #grupoList {
+      display: none;
+      color: white;
+      margin-top: 20px;
+    }
+
+    .watermark {
+      position: fixed;
+      bottom: 10px;
+      opacity: 0.5;
+      font-size: 14px;
+    }
+
+    .credit {
+      position: fixed;
+      top: 10px;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="credit">Página elaborada por Diego Jared</div>
+
+  <h1>¿Te gustó nuestra exposición?</h1>
+
+  <div class="buttons">
+    <button id="si">Sí</button>
+    <button id="no">No</button>
+  </div>
+
+  <div id="mensaje"></div>
+
+  <div id="grupoList">
+    <p><strong>Grupo conformado por:</strong></p>
+    <p>• Diego Jared<br>
+       • Kevin Alexis<br>
+       • Cesar Leonardo<br>
+       • Sebastián Daniel<br>
+       • W<br>
+       • L</p>
+  </div>
+
+  <div class="watermark">ESTI 71 1° "C"</div>
+
+  <script>
+    const btnNo = document.getElementById("no");
+    const btnSi = document.getElementById("si");
+    const mensaje = document.getElementById("mensaje");
+    const grupoList = document.getElementById("grupoList");
+
+    function moverNo() {
+      const maxX = window.innerWidth - btnNo.offsetWidth;
+      const maxY = window.innerHeight - btnNo.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      btnNo.style.left = x + "px";
+      btnNo.style.top = y + "px";
+    }
+
+    btnNo.addEventListener("mouseenter", moverNo);
+
+    setInterval(moverNo, 1200);
+
+    btnSi.addEventListener("click", () => {
+      btnSi.style.display = "none";
+      btnNo.style.display = "none";
+
+      mensaje.innerHTML = `
+        <h2>¡Gracias!</h2>
+        <p>Recuerda comer saludable 🥗</p>
+        <button id="grupoBtn">GRUPO</button>
+      `;
+
+      const grupoBtn = document.getElementById("grupoBtn");
+
+      grupoBtn.addEventListener("click", () => {
+        grupoBtn.style.display = "none";
+        grupoList.style.display = "block";
+      });
+    });
+  </script>
+
+</body>
+</html>
